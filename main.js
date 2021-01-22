@@ -1,6 +1,7 @@
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
+const { createPublicKey } = require('crypto');
 
 const {app,BrowserWindow,Menu} = electron;
 
@@ -18,19 +19,34 @@ app.on('ready',function(){
           }
     });
 
-    //loading the html file
+    //loading the html file 
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname,'mainWindow.html'),
         protocol:'file:',
         slashes: true
 
     }));
-   const mainMenu=Menu.buildfromTemplate(mainMenuTemplate);
-   Menu.setApplicationsMenu(mainMenu);
+   const mainMenu=Menu.buildFromTemplate(mainMenuTemplate);
+   //insert the menu
+   Menu.setApplicationMenu(mainMenu);
     
 });
+
 const mainMenuTemplate=[
     {
-            label:'File'
+            label:'File',
+            submenu:[
+                {
+                    label: 'Add Iteam'
+                },
+                {
+                    lable:'Clear Iteam'
+                },{
+                    lable:'Quit',
+                    click(){
+                        app.quit;
+                    }
+                }
+            ]
     }
 ]; 
