@@ -2,7 +2,7 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 
-const {app,BrowserWindow} = electron;
+const {app,BrowserWindow,Menu} = electron;
 
 let mainWindow;
 
@@ -11,7 +11,11 @@ app.on('ready',function(){
     
     // create new Window
     mainWindow=new BrowserWindow({
-
+        webPreferences: {
+            // nodeIntegration: false, // is default value after Electron v5
+            contextIsolation: true, // protect against prototype pollution
+        
+          }
     });
 
     //loading the html file
@@ -21,11 +25,12 @@ app.on('ready',function(){
         slashes: true
 
     }));
-   const mainMenu=Manu.buildfromTemplate(mainMenuTemplate);
+   const mainMenu=Menu.buildfromTemplate(mainMenuTemplate);
+   Menu.setApplicationsMenu(mainMenu);
     
 });
 const mainMenuTemplate=[
     {
             label:'File'
     }
-];
+]; 
