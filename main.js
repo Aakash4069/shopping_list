@@ -3,7 +3,8 @@ const url = require('url');
 const path = require('path');
 const { createPublicKey } = require('crypto'); //
 
-const {app,BrowserWindow,Menu} = electron;
+const {app,BrowserWindow} = electron;
+const {Menu}=require('electron');
 
 let mainWindow;
 let addWindow; 
@@ -18,7 +19,7 @@ app.on('ready',function(){
             // nodeIntegration: false, // is default value after Electron v5
             contextIsolation: true, // protect against prototype pollution
         
-          }
+        }
     });
 
     //loading the html file 
@@ -33,8 +34,9 @@ app.on('ready',function(){
     mainWindow.on('closed',function(){
         app.quit();
     })
-   const mainMenu=Menu.buildFromTemplate(mainMenuTemplate);
+   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
    //insert the menu  
+   
    Menu.setApplicationMenu(mainMenu);
     
 });
