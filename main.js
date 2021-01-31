@@ -1,7 +1,7 @@
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
-const { createPublicKey } = require('crypto'); 
+const { createPublicKey } = require('crypto'); //
 
 const {app,BrowserWindow,Menu} = electron;
 
@@ -18,19 +18,23 @@ app.on('ready',function(){
             // nodeIntegration: false, // is default value after Electron v5
             contextIsolation: true, // protect against prototype pollution
         
-        },
+          }
     });
 
     //loading the html file 
-    const url=require('url').format({
-        protocol:'file:',
-        slashes: true,
-        pathname: path.join(__dirname,'mainWindow.html'),
+//    mainWindow.loadURL(url.format({
+//         protocol:'file:',
+//         slashes: true,
+//         pathname: path.join(__dirname,'mainWindow.html'),
 
-    });
-    mainWindow.loadURL(url)
+//     }));
+    mainWindow.loadURL(`file://${__dirname}/mainWindow.html`);
+    //Quit app when closed
+    mainWindow.on('closed',function(){
+        app.quit();
+    })
    const mainMenu=Menu.buildFromTemplate(mainMenuTemplate);
-   //insert the menu
+   //insert the menu  
    Menu.setApplicationMenu(mainMenu);
     
 });
@@ -39,16 +43,21 @@ app.on('ready',function(){
 function createAddWindow(){
 
     addWindow=new BrowserWindow({
-        wigth:200,
-        height: 300,
+        wigth:  300,
+        height: 200,
         title:'Add Shoping list Items'
     })
 
-    addWindow.loadURL(url.format({
-        protocol:'file:',
-        slashes: true,
-        pathname: path.join(__dirname,'addWindow.html'),
-    }));
+    // addWindow.loadURL(url.format({
+    //     protocol:'file:',
+    //     slashes: true,
+    //     pathname: path.join(__dirname,'addWindow.html'),
+    // }));
+    addWindow.loadURL(`file://${__dirname}/addWindow.html`);
+    // for garbage collector
+    addWindow.on('closed',function(){
+        addwindow==null;
+    })
 
 }
 
@@ -66,7 +75,7 @@ const mainMenuTemplate=[
                     lable:'Clear Iteam'
                 },{
                     lable:'Quit',
-                    accelerator: process.platform=='linux' ? 'commands+q':'ctrl+Q',
+                    accelerator: process.platform=='linux' ? 'commands+q':'ctrl+alt+t',
                     click(){
                         app.quit();
                     }
@@ -74,3 +83,19 @@ const mainMenuTemplate=[
             ]
     }
 ]; 
+
+// add develeper tools
+if(process.env.NODE_ENV !== 'productions'){
+    mainMenuTemplate.push({
+        lable: 'Developer Tools',
+        submenu:[
+            {
+                label:'Toggle DevTools',
+                accelerator: process.platform=='darwin'?'command+I':'Ctrl+I',
+                click(item,focusWindow){
+                    focusWindow.toggleDevtools();
+                }
+            }
+        ]
+    })
+}
