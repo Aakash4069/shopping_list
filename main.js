@@ -23,14 +23,10 @@ app.on('ready',function(){
 
     //loading the html file 
     mainWindow.loadURL(url.format({
-        // protocol:'file:',
-        // slashes: true,
-        // pathname: path.join(__dirname,'mainWindow.html'
-        protocol: 'https',
-        hostname: 'mainWindow.html',
-        pathname: 'path.join(__dirname,'mainWindow.html'
-        
-        
+        protocol:'file:',
+        slashes: true,
+        pathname: path.join(__dirname,'mainWindow.html'),
+
     }));
    const mainMenu=Menu.buildFromTemplate(mainMenuTemplate);
    //insert the menu
