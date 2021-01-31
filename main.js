@@ -1,7 +1,7 @@
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
-const { createPublicKey } = require('crypto');
+const { createPublicKey } = require('crypto'); 
 
 const {app,BrowserWindow,Menu} = electron;
 
@@ -18,16 +18,17 @@ app.on('ready',function(){
             // nodeIntegration: false, // is default value after Electron v5
             contextIsolation: true, // protect against prototype pollution
         
-          }
+        },
     });
 
     //loading the html file 
-    mainWindow.loadURL(url.format({
+    const url=require('url').format({
         protocol:'file:',
         slashes: true,
         pathname: path.join(__dirname,'mainWindow.html'),
 
-    }));
+    });
+    mainWindow.loadURL(url)
    const mainMenu=Menu.buildFromTemplate(mainMenuTemplate);
    //insert the menu
    Menu.setApplicationMenu(mainMenu);
@@ -43,7 +44,11 @@ function createAddWindow(){
         title:'Add Shoping list Items'
     })
 
-    addWindow=loadURL(url.format())
+    addWindow.loadURL(url.format({
+        protocol:'file:',
+        slashes: true,
+        pathname: path.join(__dirname,'addWindow.html'),
+    }));
 
 }
 
