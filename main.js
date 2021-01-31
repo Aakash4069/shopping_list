@@ -53,7 +53,7 @@ function createAddWindow(){
     //     slashes: true,
     //     pathname: path.join(__dirname,'addWindow.html'),
     // }));
-    addWindow.loadURL(`file://${__dirname}/addWindow.html`);
+    addWindow.loadURL(`file://${__dirname}/addWindow.html`);  // new method of loadURL
     // for garbage collector
     addWindow.on('closed',function(){
         addwindow==null;
