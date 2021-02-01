@@ -4,7 +4,7 @@ const path = require('path');
 const { createPublicKey } = require('crypto'); //
 
 const {app,BrowserWindow} = electron;
-const {Menu}=require('electron');
+const {Menu}=electron.Menu;
 
 let mainWindow;
 let addWindow; 
@@ -34,6 +34,7 @@ app.on('ready',function(){
     mainWindow.on('closed',function(){
         app.quit();
     })
+    // build menu from template
    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
    //insert the menu  
    
@@ -63,6 +64,7 @@ function createAddWindow(){
 
 }
 
+// creat manu template 
 const mainMenuTemplate=[
     {
             label:'File',
@@ -77,7 +79,7 @@ const mainMenuTemplate=[
                     lable:'Clear Iteam'
                 },{
                     lable:'Quit',
-                    accelerator: process.platform=='linux' ? 'commands+q':'ctrl+alt+t',
+                    accelerator: process.platform=='linux' ? 'commands+q':'Ctrl+alt+t',
                     click(){
                         app.quit();
                     }
@@ -93,10 +95,13 @@ if(process.env.NODE_ENV !== 'productions'){
         submenu:[
             {
                 label:'Toggle DevTools',
-                accelerator: process.platform=='darwin'?'command+I':'Ctrl+I',
+                accelerator: process.platform=='darwin'?'command+I':'Ctrl+alt+t',
                 click(item,focusWindow){
                     focusWindow.toggleDevtools();
                 }
+            },
+            {
+                role:'reload'
             }
         ]
     })
