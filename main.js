@@ -5,6 +5,7 @@ const { createPublicKey } = require('crypto'); //
 
 const {app,BrowserWindow} = electron;
 const {Menu}=electron.Menu;
+// const { app,Menu} = require('electron').remote;
 
 let mainWindow;
 let addWindow; 
@@ -29,7 +30,8 @@ app.on('ready',function(){
 //         pathname: path.join(__dirname,'mainWindow.html'),
 
 //     }));
-    mainWindow.loadURL(`file://${__dirname}/mainWindow.html`);
+    // mainWindow.loadURL(`file://${__dirname}/mainWindow.html`);
+    mainWindow.loadURL('file://' + __dirname + '/mainWindow.html');
     //Quit app when closed
     mainWindow.on('closed',function(){
         app.quit();
