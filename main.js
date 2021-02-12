@@ -4,8 +4,8 @@ const path = require('path');
 const { createPublicKey } = require('crypto'); //
 
 const {app,BrowserWindow} = electron;
-const {Menu}=require('electron').Menu;
-// const { app,Menu} = require('electron').remote;
+// const {Menu}=require('electron').Menu;
+const {Menu} = require('electron').remote;
 
 let mainWindow;
 let addWindow; 
