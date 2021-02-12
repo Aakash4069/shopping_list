@@ -4,7 +4,7 @@ const path = require('path');
 const { createPublicKey } = require('crypto'); //
 
 const {app,BrowserWindow} = electron;
-const {Menu}=electron.Menu;
+const {Menu}=require('electron').Menu;
 // const { app,Menu} = require('electron').remote;
 
 let mainWindow;
@@ -17,7 +17,7 @@ app.on('ready',function(){
     // create new Window
     mainWindow=new BrowserWindow({
         webPreferences: {
-            // nodeIntegration: false, // is default value after Electron v5
+            nodeIntegration: true, // is default value after Electron v5
             contextIsolation: true, // protect against prototype pollution
         
         }
