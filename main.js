@@ -4,8 +4,8 @@ const path = require('path');
 const { createPublicKey } = require('crypto'); //
 
 const {app,BrowserWindow} = electron;
-// const {Menu}=require('electron').Menu;
-const {Menu} = require('electron').remote;
+const {Menu}=require('electron').Menu;
+// const {Menu} = require('electron').remote;
 
 let mainWindow;
 let addWindow; 
@@ -19,18 +19,20 @@ app.on('ready',function(){
         webPreferences: {
             nodeIntegration: true, // is default value after Electron v5
             contextIsolation: true, // protect against prototype pollution
+            enableRemoteModule: true
         
         }
     });
 
     //loading the html file 
-//    mainWindow.loadURL(url.format({
-//         protocol:'file:',
-//         slashes: true,
-//         pathname: path.join(__dirname,'mainWindow.html'),
+    //    mainWindow.loadURL(url.format({
+    //         protocol:'file:',
+    //         slashes: true,
+    //         pathname: path.join(__dirname,'mainWindow.html'),
 
-//     }));
+    //     }));
     // mainWindow.loadURL(`file://${__dirname}/mainWindow.html`);
+
     mainWindow.loadURL('file://' + __dirname + '/mainWindow.html');
     //Quit app when closed
     mainWindow.on('closed',function(){
