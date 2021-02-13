@@ -14,6 +14,7 @@ let addWindow;
 app.on('ready',function(){
     
     
+
     // create new Window
     mainWindow=new BrowserWindow({
         webPreferences: {
