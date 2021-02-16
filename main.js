@@ -3,8 +3,9 @@ const url = require('url');
 const path = require('path');
 const { createPublicKey } = require('crypto'); //
 
-const {app,BrowserWindow} = electron;
-const {Menu}=require('electron').Menu;
+const {remote} =electron;
+const {app} = electron;
+const {Menu,dialog,BrowserWindow}=remote;
 // const {Menu} = require('electron').remote;
 
 let mainWindow;
@@ -20,6 +21,7 @@ app.on('ready',function(){
         webPreferences: {
             nodeIntegration: true, // is default value after Electron v5
             contextIsolation: true, // protect against prototype pollution
+            enableRemoteModule: true,
             enableRemoteModule: true
         
         }
@@ -84,7 +86,7 @@ const mainMenuTemplate=[
                     lable:'Clear Iteam'
                 },{
                     lable:'Quit',
-                    accelerator: process.platform=='linux' ? 'commands+q':'Ctrl+alt+t',
+                    accelerator: process.platform==='linux' ? 'Ctrl+alt+t':' commands+q',
                     click(){
                         app.quit();
                     }
