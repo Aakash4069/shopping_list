@@ -91,6 +91,7 @@ const mainMenuTemplate=[
                 }
             ]
     }
+    
 ]; 
 
 // add develeper tools
