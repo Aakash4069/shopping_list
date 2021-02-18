@@ -55,6 +55,8 @@ const mainMenuTemplate=[
                         createAddWindow();
                     }
                 },
+
+                
                 {
                     lable:'Clear Iteam'
                 },{
