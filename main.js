@@ -3,9 +3,9 @@ const url = require('url');
 const path = require('path');
 const { createPublicKey } = require('crypto'); //
 
-const {remote} =electron;
+// const {remote} =electron;
 const {app} = electron;
-const {Menu,dialog,BrowserWindow}=remote;
+const {Menu,BrowserWindow}=electron;
 // const {Menu} = require('electron').remote;
 
 let mainWindow;
@@ -21,8 +21,8 @@ app.on('ready',function(){
         webPreferences: {
             nodeIntegration: true, // is default value after Electron v5
             contextIsolation: true, // protect against prototype pollution
-            enableRemoteModule: true,
-            enableRemoteModule: true
+            // enableRemoteModule: true,
+            // enableRemoteModule: true
         
         }
     });
@@ -42,12 +42,36 @@ app.on('ready',function(){
         app.quit();
     })
     // build menu from template
-   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
-   //insert the menu  
-   
-   Menu.setApplicationMenu(mainMenu);
     
 });
+
+const mainMenuTemplate=[
+    {
+            label:'File',
+            submenu:[
+                {
+                    label: 'Add Iteam',
+                    click(){
+                        createAddWindow();
+                    }
+                },
+                {
+                    lable:'Clear Iteam'
+                },{
+                    lable:'Quit',
+                    // accelerator: process.platform==='linux' ? 'Ctrl+alt+t':' commands+q',
+                    click(){
+                        app.quit();
+                    }
+                }
+            ]
+    }
+    
+]; 
+const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+//insert the menu  
+
+Menu.setApplicationMenu(mainMenu);
 
 //handle creating add Window
 function createAddWindow(){
@@ -72,29 +96,7 @@ function createAddWindow(){
 }
 
 // creat manu template 
-const mainMenuTemplate=[
-    {
-            label:'File',
-            submenu:[
-                {
-                    label: 'Add Iteam',
-                    click(){
-                        createAddWindow();
-                    }
-                },
-                {
-                    lable:'Clear Iteam'
-                },{
-                    lable:'Quit',
-                    accelerator: process.platform==='linux' ? 'Ctrl+alt+t':' commands+q',
-                    click(){
-                        app.quit();
-                    }
-                }
-            ]
-    }
-    
-]; 
+
 
 // add develeper tools
 if(process.env.NODE_ENV !== 'productions'){
