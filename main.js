@@ -56,10 +56,11 @@ const mainMenuTemplate=[
                     }
                 },
 
-                
+
                 {
                     lable:'Clear Iteam'
-                },{
+                },
+                {
                     lable:'Quit',
                     // accelerator: process.platform==='linux' ? 'Ctrl+alt+t':' commands+q',
                     click(){
